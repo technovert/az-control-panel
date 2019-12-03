@@ -32,3 +32,19 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
+- task: CopyFiles@1
+  displayName: 'Copy files to: $(build.artifactStagingDirectory)'
+  inputs:
+    SourceFolder: '$(build.sourcesDirectory)'
+    Contents: |
+      **\bin\$(BuildConfiguration)\**
+      src\*.testsettings
+    TargetFolder: '$(build.artifactStagingDirectory)'
+  condition: succeeded()
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish artifact: drop'
+  inputs:
+    PathtoPublish: '$(build.artifactStagingDirectory)'
+  condition: succeeded()
