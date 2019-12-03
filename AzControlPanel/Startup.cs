@@ -8,7 +8,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace AzControlPanel
 {
-    // The startup class
     public class Startup
     {
         public Startup(IConfiguration configuration)
